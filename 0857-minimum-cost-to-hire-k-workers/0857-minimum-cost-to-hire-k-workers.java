@@ -7,10 +7,6 @@ class Solution {
             this.quality = quality;
             this.wage = wage;
         }
-        @Override
-        public String toString() {
-            return "quality : " + quality + " wage : " + wage;
-        }
     }
     public double mincostToHireWorkers(int[] quality, int[] wage, int k) {
         PriorityQueue<Pair> candidates = new PriorityQueue<>((p1, p2) -> {
