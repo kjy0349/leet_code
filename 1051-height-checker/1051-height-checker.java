@@ -46,6 +46,7 @@ class Solution {
     public int heightChecker(int[] heights) {
         int[] sorted = heights.clone();
         // quickSort(sorted, 0, sorted.length - 1);
+        // quickSort를 사용한 후, partioning이 수행될 때 마다 heights 배열과 비교하면 더 빨리 답을 구할 수 있을 것.
         Arrays.sort(sorted);
         int answer = getDiffCount(heights, sorted);
         return answer;
