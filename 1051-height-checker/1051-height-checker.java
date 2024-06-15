@@ -1,53 +1,55 @@
 import java.io.*;
 import java.util.*;
 class Solution {
-    static int answer;
-    static int[] original;
+    int answer;
+    int[] original;
     
-    private void swap(int[] array, int first, int second) {
-        int temp = array[second];
-        array[second] = array[first];
-        array[first] = temp;
+    private void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
     }
     
-    private void quickSort(int[] sorted, int leftIdx, int rightIdx) {
-        if (leftIdx >= rightIdx) {
-            if (leftIdx == rightIdx) {
-                if (sorted[leftIdx] != original[leftIdx]) {
+    private void quickSort(int[] array, int left, int right) {
+        if (left >= right) {
+            if (left == right) {
+                if (original[left] != array[left]) {
                     answer++;
                 }
             }
             return ;
         }
-        int pivot = sorted[leftIdx];
-        int left = leftIdx + 1;
-        int right = rightIdx;
-        
-        while (left <= right) {
-            while (left <= right && sorted[left] < pivot) {
-                left++;
+        int pivot = array[left];
+        int i = left + 1;
+        int j = right;
+        while (i <= j) {
+            while (i <= j && pivot > array[i]) {
+                i++;
             }
-            while (left <= right && sorted[right] > pivot) {
-                right--;
+            while (i <= j && pivot < array[j]) {
+                j--;
             }
-            if (left <= right) {
-                swap(sorted, left, right);
-                left++; right--;
+            if (i <= j) {
+                swap(array, i, j);
+                i++;
+                j--;
             }
         }
-        swap(sorted, leftIdx, right);
-        if (pivot != original[right]) {
+        swap(array, left, j);
+        if (pivot != original[j]) {
             answer++;
         }
-        quickSort(sorted, leftIdx, right - 1);
-        quickSort(sorted, right + 1, rightIdx);
+        quickSort(array, left, j - 1);
+        quickSort(array, j + 1, right);
     }
     
     public int heightChecker(int[] heights) {
         int[] sorted = heights.clone();
         answer = 0;
         original = heights;
+        
         quickSort(sorted, 0, sorted.length - 1);
+        System.out.println(Arrays.toString(sorted));
         // quickSort를 사용한 후, partioning이 수행될 때 마다 heights 배열과 비교하면 더 빨리 답을 구할 수 있을 것.
         return answer;
     }
