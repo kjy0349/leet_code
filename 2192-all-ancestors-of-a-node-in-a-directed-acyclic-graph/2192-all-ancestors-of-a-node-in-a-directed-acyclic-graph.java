@@ -3,7 +3,6 @@ class Solution {
     public static ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adjList, int start) {
         Queue<Integer> queue = new ArrayDeque<>();
         ArrayList<Integer> ans = new ArrayList<>();
-        // 메모리 초과 나면, ArrayList에 넣어서 sort 하는걸로 시도
         TreeSet<Integer> set = new TreeSet<>();
         queue.offer(start);
         set.add(start);
